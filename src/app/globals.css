@@ -3,19 +3,77 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
+
+/* Ink Cursor Styles */
+.ink-cursor {
+  pointer-events: none;
+  position: fixed;
+  display: block;
+  border-radius: 0;
+  transform-origin: center center;
+  mix-blend-mode: difference;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  filter: url("#goo");
+}
+
+.ink-cursor span {
+  position: absolute;
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 20px;
+  background-color: white;
+  transform-origin: center center;
+  transform: translate(-50%, -50%);
+}
+
+/* Hide default cursor */
+* {
+  cursor: none;
+}
+
+/* Hover effect styles */
+.hover-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-effect-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 125%;
+  height: 100%;
+  background-color: #ee3d3d;
+  transform: translateX(-112%) skew(-10deg);
+  transition: transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover-effect h2 {
+  transition: color 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover-effect:hover h2 {
+  color: #000000;
+}
+
+.hover-effect:hover .hover-effect-bg {
+  transform: translateX(-12%) skew(-10deg);
+}
+
